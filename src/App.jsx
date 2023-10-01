@@ -1,19 +1,51 @@
 import { useState } from "react"
 
-function generatePairs(numPairs, minRange, maxRange) {
-  const pairs = []
+const emojiArray = [
+  "🐢",
+  "🐈",
+  "🐸",
+  "🐘",
+  "🦃",
+  "🐳",
+  "🐬",
+  "🐦",
+  "🍍",
+  "🥝",
+  "👺",
+  "🥑",
+  "🌽",
+  "🥕",
+  "🥦",
+  "🍆",
+  "🥔",
+  "🍠",
+  "🌶️",
+  "🦘",
+]
 
-  for (let i = 0; i < numPairs; i++) {
-    const num = Math.floor(Math.random() * (maxRange - minRange + 1)) + minRange
-    pairs.push([num, num])
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    // swap elements array[i] and array[j]
+    ;[array[i], array[j]] = [array[j], array[i]]
   }
-
-  return pairs
 }
 
-// Example usage: generate 3 pairs of equal integers within the range 1 to 10
-const result = generatePairs(3, 1, 10)
-console.log("RANDOM PAIRS:", result)
+function getRandomElements(arr, n) {
+  const copyArr = [...arr] // Create a copy if you don't want to modify the original array
+  shuffleArray(copyArr)
+  return copyArr.slice(0, n)
+}
+
+const starterEmojiArr = getRandomElements(emojiArray, 3)
+
+const gameEmojiArr = [...starterEmojiArr, ...starterEmojiArr]
+
+const shuffledGameArray = getRandomElements(gameEmojiArr, 6)
+
+console.log("Shuffled Game Array:", shuffledGameArray)
+console.log("Starter Emoji:", starterEmojiArr)
+console.log("Game Emoji:", gameEmojiArr)
 
 const App = () => {
   const [rows, setRows] = useState(3)
