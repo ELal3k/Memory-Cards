@@ -47,41 +47,68 @@ console.log("Shuffled Game Array:", shuffledGameArray)
 console.log("Starter Emoji:", starterEmojiArr)
 console.log("Game Emoji:", gameEmojiArr)
 
+//###################APP START ###################
 const App = () => {
-  const [rows, setRows] = useState(3)
-  const [cols, setCols] = useState(3)
+  const [rows, setRows] = useState(0)
+  const [cols, setCols] = useState(0)
+  const [gameArray, setGameArray] = useState(shuffledGameArray)
 
   function createArray() {
     let arr = []
     for (let i = 0; i < rows; i++) {
       arr[i] = []
       for (let j = 0; j < cols; j++) {
-        arr[i][j] = 0
-        0
-      }
-    }
-    return arr
-  }
-
-  function gameArray() {
-    let arr = createArray()
-    for (let i = 0; i < rows; i++) {
-      for (let j = 0; j < cols; j++) {
-        arr[i][j] = Math.floor(Math.random() * 8)
+        arr[i][j] = `${i},${j}`
       }
     }
     return arr
   }
 
   const arrNull = createArray()
-  const arrGame = gameArray()
-  console.log(arrGame)
 
   return (
-    <main className="h-screen bg-slate-500">
+    <main className="min-h-screen bg-slate-500">
       {cols === 0 && rows === 0 ? (
-        <div className="flex justify-center my-auto">
-          Set the number of cards to play!
+        <div className="flex flex-col items-center">
+          <p className=" ">Set the number of cards to play!</p>
+          <div className="flex gap-6">
+            <button
+              className="p-3 m-3 rounded-md bg-gray-400 border-2 border-green-400"
+              onClick={() => {
+                setRows(2)
+                setCols(3)
+              }}
+            >
+              6
+            </button>
+            <button
+              className=" p-3 m-3 rounded-md bg-gray-400 border-2 border-green-400 "
+              onClick={() => {
+                setRows(2)
+                setCols(4)
+              }}
+            >
+              8
+            </button>
+            <button
+              className=" p-3 m-3 rounded-md bg-gray-400 border-2 border-green-400"
+              onClick={() => {
+                setRows(2)
+                setCols(5)
+              }}
+            >
+              10
+            </button>
+            <button
+              className=" p-3 m-3 rounded-md bg-gray-400 border-2 border-green-400"
+              onClick={() => {
+                setRows(3)
+                setCols(4)
+              }}
+            >
+              12
+            </button>
+          </div>
         </div>
       ) : (
         arrNull.map((row, ridx) => {
