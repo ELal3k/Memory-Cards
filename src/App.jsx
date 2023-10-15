@@ -68,67 +68,7 @@ const App = () => {
 
   return (
     <main className="min-h-screen bg-slate-500">
-      {cols === 0 && rows === 0 ? (
-        <div className="flex flex-col items-center">
-          <p className=" ">Set the number of cards to play!</p>
-          <div className="flex gap-6">
-            <button
-              className="p-3 m-3 rounded-md bg-gray-400 border-2 border-green-400"
-              onClick={() => {
-                setRows(2)
-                setCols(3)
-              }}
-            >
-              6
-            </button>
-            <button
-              className=" p-3 m-3 rounded-md bg-gray-400 border-2 border-green-400 "
-              onClick={() => {
-                setRows(2)
-                setCols(4)
-              }}
-            >
-              8
-            </button>
-            <button
-              className=" p-3 m-3 rounded-md bg-gray-400 border-2 border-green-400"
-              onClick={() => {
-                setRows(2)
-                setCols(5)
-              }}
-            >
-              10
-            </button>
-            <button
-              className=" p-3 m-3 rounded-md bg-gray-400 border-2 border-green-400"
-              onClick={() => {
-                setRows(3)
-                setCols(4)
-              }}
-            >
-              12
-            </button>
-          </div>
-        </div>
-      ) : (
-        arrNull.map((row, ridx) => {
-          return (
-            <div key={ridx} className="flex justify-center my-auto">
-              {row.map((cell, cidx) => {
-                return (
-                  <button
-                    key={cidx}
-                    className="p-3 m-3 rounded-md bg-gray-400 border-2 border-green-400 "
-                    onClick={() => console.log("row:", ridx, "col:", cidx)}
-                  >
-                    {cell}
-                  </button>
-                )
-              })}
-            </div>
-          )
-        })
-      )}
+      <h1>MEMORY CARDS</h1>
     </main>
   )
 }
