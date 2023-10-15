@@ -67,9 +67,39 @@ const App = () => {
   const arrNull = createArray()
 
   return (
-    <main className="min-h-screen bg-slate-500">
-      <h1>MEMORY CARDS</h1>
-    </main>
+    <div className="min-h-screen bg-slate-500">
+      <header className="py-4">
+        <h1 className="text-center text-8xl font-nabla">MEMORY CARDS</h1>
+      </header>
+      <main>
+        <h3 className="font-dm text-xl text-center">
+          Choose the number of cards to play
+        </h3>
+        <InitialCards />
+      </main>
+    </div>
   )
 }
 export default App
+
+function InitialCards() {
+  return (
+    <div className="flex justify-center gap-4 py-10">
+      <button className="bg-slate-300 text-4xl p-10 rounded-lg border-4 border-blue-500 ">
+        4
+      </button>
+      <button className="bg-slate-300 text-4xl p-10 rounded-lg border-4 border-blue-500 ">
+        6
+      </button>
+      <button className="bg-slate-300 text-4xl p-10 rounded-lg border-4 border-blue-500">
+        8
+      </button>
+      <button className="bg-slate-300 text-4xl p-10 rounded-lg border-4 border-blue-500">
+        10
+      </button>
+      <button className="bg-slate-300 text-4xl p-10 rounded-lg border-4 border-blue-500">
+        12
+      </button>
+    </div>
+  )
+}
