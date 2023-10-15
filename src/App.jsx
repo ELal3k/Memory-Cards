@@ -68,11 +68,11 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-slate-500">
-      <header className="py-4">
+      <header className="pt-4 pb-20">
         <h1 className="text-center text-8xl font-nabla">MEMORY CARDS</h1>
       </header>
       <main>
-        <h3 className="font-dm text-xl text-center">
+        <h3 className="font-dm text-2xl text-center">
           Choose the number of cards to play
         </h3>
         <InitialCards />
