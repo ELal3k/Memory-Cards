@@ -75,7 +75,25 @@ const App = () => {
         <h1 className="text-center text-8xl font-nabla">MEMORY CARDS</h1>
       </header>
       <main>
-        <InitialCards onSelect={setSelectedNumber} />
+        {selectedNumber === null ? (
+          <InitialCards onSelect={setSelectedNumber} />
+        ) : (
+          <div className="flex justify-center">
+            <div className="grid grid-cols-4 gap-16">
+              <button>hello</button>
+              <button>hello</button>
+              <button>hello</button>
+              <button>hello</button>
+              <button>hello</button>
+              <button>hello</button>
+              <button>hello</button>
+              <button>hello</button>
+              <button>hello</button>
+              <button>hello</button>
+              <button>hello</button>
+            </div>
+          </div>
+        )}
       </main>
     </div>
   )
