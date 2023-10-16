@@ -52,6 +52,9 @@ const App = () => {
   const [rows, setRows] = useState(0)
   const [cols, setCols] = useState(0)
   const [gameArray, setGameArray] = useState(shuffledGameArray)
+  const [selectedNumber, setSelectedNumber] = useState(null)
+
+  console.log("selectedNumber:", selectedNumber)
 
   function createArray() {
     let arr = []
@@ -72,34 +75,55 @@ const App = () => {
         <h1 className="text-center text-8xl font-nabla">MEMORY CARDS</h1>
       </header>
       <main>
-        <h3 className="font-dm text-2xl text-center">
-          Choose the number of cards to play
-        </h3>
-        <InitialCards />
+        <InitialCards onSelect={setSelectedNumber} />
       </main>
     </div>
   )
 }
 export default App
 
-function InitialCards() {
+function InitialCards({ onSelect }) {
+  const handleSelect = (number) => {
+    onSelect(number)
+  }
+
   return (
-    <div className="flex justify-center gap-4 py-10">
-      <button className="bg-slate-300 text-4xl p-10 rounded-lg border-4 border-blue-500 ">
-        4
-      </button>
-      <button className="bg-slate-300 text-4xl p-10 rounded-lg border-4 border-blue-500 ">
-        6
-      </button>
-      <button className="bg-slate-300 text-4xl p-10 rounded-lg border-4 border-blue-500">
-        8
-      </button>
-      <button className="bg-slate-300 text-4xl p-10 rounded-lg border-4 border-blue-500">
-        10
-      </button>
-      <button className="bg-slate-300 text-4xl p-10 rounded-lg border-4 border-blue-500">
-        12
-      </button>
-    </div>
+    <>
+      <h3 className="font-dm text-2xl text-center">
+        Choose the number of cards to play
+      </h3>
+      <div className="flex justify-center gap-4 py-10">
+        <button
+          className="bg-slate-300 text-4xl p-10 rounded-lg border-4 border-blue-500 "
+          onClick={() => handleSelect(8)}
+        >
+          16
+        </button>
+        <button
+          className="bg-slate-300 text-4xl p-10 rounded-lg border-4 border-blue-500 "
+          onClick={() => handleSelect(10)}
+        >
+          20
+        </button>
+        <button
+          className="bg-slate-300 text-4xl p-10 rounded-lg border-4 border-blue-500"
+          onClick={() => handleSelect(12)}
+        >
+          24
+        </button>
+        <button
+          className="bg-slate-300 text-4xl p-10 rounded-lg border-4 border-blue-500"
+          onClick={() => handleSelect(14)}
+        >
+          28
+        </button>
+        <button
+          className="bg-slate-300 text-4xl p-10 rounded-lg border-4 border-blue-500"
+          onClick={() => handleSelect(16)}
+        >
+          32
+        </button>
+      </div>
+    </>
   )
 }
