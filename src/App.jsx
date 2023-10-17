@@ -37,37 +37,23 @@ function getRandomElements(arr, n) {
   return copyArr.slice(0, n)
 }
 
-const starterEmojiArr = getRandomElements(emojiArray, 3)
-
-const gameEmojiArr = [...starterEmojiArr, ...starterEmojiArr]
-
-const shuffledGameArray = getRandomElements(gameEmojiArr, 6)
-
-console.log("Shuffled Game Array:", shuffledGameArray)
-console.log("Starter Emoji:", starterEmojiArr)
-console.log("Game Emoji:", gameEmojiArr)
-
 //###################APP START ###################
 const App = () => {
-  const [rows, setRows] = useState(0)
-  const [cols, setCols] = useState(0)
-  const [gameArray, setGameArray] = useState(shuffledGameArray)
   const [selectedNumber, setSelectedNumber] = useState(null)
 
+  const starterEmojiArr = getRandomElements(emojiArray, selectedNumber)
+
+  const gameEmojiArr = [...starterEmojiArr, ...starterEmojiArr]
+
+  const shuffledGameArray = getRandomElements(gameEmojiArr, 2 * selectedNumber)
+
   console.log("selectedNumber:", selectedNumber)
+  console.log("gameEmojiArr:", gameEmojiArr)
+  console.log("shuffledGameArray:", shuffledGameArray)
 
-  function createArray() {
-    let arr = []
-    for (let i = 0; i < rows; i++) {
-      arr[i] = []
-      for (let j = 0; j < cols; j++) {
-        arr[i][j] = `${i},${j}`
-      }
-    }
-    return arr
+  function handleSelect(number) {
+    setSelectedNumber(number)
   }
-
-  const arrNull = createArray()
 
   return (
     <div className="min-h-screen bg-slate-500">
@@ -76,23 +62,9 @@ const App = () => {
       </header>
       <main>
         {selectedNumber === null ? (
-          <InitialCards onSelect={setSelectedNumber} />
+          <InitialCards onSelect={handleSelect} />
         ) : (
-          <div className="flex justify-center">
-            <div className="grid grid-cols-4 gap-16">
-              <button>hello</button>
-              <button>hello</button>
-              <button>hello</button>
-              <button>hello</button>
-              <button>hello</button>
-              <button>hello</button>
-              <button>hello</button>
-              <button>hello</button>
-              <button>hello</button>
-              <button>hello</button>
-              <button>hello</button>
-            </div>
-          </div>
+          <GameCards shuffledArray={shuffledGameArray} />
         )}
       </main>
     </div>
@@ -100,11 +72,8 @@ const App = () => {
 }
 export default App
 
+// ################### INITIAL CARDS ###################
 function InitialCards({ onSelect }) {
-  const handleSelect = (number) => {
-    onSelect(number)
-  }
-
   return (
     <>
       <h3 className="font-dm text-2xl text-center">
@@ -113,34 +82,50 @@ function InitialCards({ onSelect }) {
       <div className="flex justify-center gap-4 py-10">
         <button
           className="bg-slate-300 text-4xl p-10 rounded-lg border-4 border-blue-500 "
-          onClick={() => handleSelect(8)}
+          onClick={() => onSelect(8)}
         >
           16
         </button>
         <button
           className="bg-slate-300 text-4xl p-10 rounded-lg border-4 border-blue-500 "
-          onClick={() => handleSelect(10)}
+          onClick={() => onSelect(10)}
         >
           20
         </button>
         <button
           className="bg-slate-300 text-4xl p-10 rounded-lg border-4 border-blue-500"
-          onClick={() => handleSelect(12)}
+          onClick={() => onSelect(12)}
         >
           24
         </button>
         <button
           className="bg-slate-300 text-4xl p-10 rounded-lg border-4 border-blue-500"
-          onClick={() => handleSelect(14)}
+          onClick={() => onSelect(14)}
         >
           28
         </button>
         <button
           className="bg-slate-300 text-4xl p-10 rounded-lg border-4 border-blue-500"
-          onClick={() => handleSelect(16)}
+          onClick={() => onSelect(16)}
         >
           32
         </button>
+      </div>
+    </>
+  )
+}
+
+function GameCards({ shuffledArray }) {
+  return (
+    <>
+      <div className="flex justify-center">
+        <div className="grid grid-cols-4 gap-16">
+          {shuffledArray.map((emoji, index) => (
+            <div key={index} className="text-4xl">
+              {emoji}
+            </div>
+          ))}
+        </div>
       </div>
     </>
   )
