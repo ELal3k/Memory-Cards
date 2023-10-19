@@ -1,26 +1,22 @@
 import { useState } from "react"
 
 const emojiArray = [
-  "🐢",
-  "🐈",
-  "🐸",
-  "🐘",
-  "🦃",
-  "🐳",
-  "🐬",
-  "🐦",
-  "🍍",
-  "🥝",
-  "👺",
-  "🥑",
-  "🌽",
-  "🥕",
-  "🥦",
-  "🍆",
-  "🥔",
-  "🍠",
-  "🌶️",
-  "🦘",
+  { id: 1, type: "🐢", isFlipped: false },
+  { id: 2, type: "🐳", isFlipped: false },
+  { id: 3, type: "🐬", isFlipped: false },
+  { id: 4, type: "🐦", isFlipped: false },
+  { id: 5, type: "🍍", isFlipped: false },
+  { id: 6, type: "🥝", isFlipped: false },
+  { id: 7, type: "👺", isFlipped: false },
+  { id: 8, type: "🥑", isFlipped: false },
+  { id: 9, type: "🌽", isFlipped: false },
+  { id: 10, type: "🥕", isFlipped: false },
+  { id: 11, type: "🥦", isFlipped: false },
+  { id: 12, type: "🍆", isFlipped: false },
+  { id: 13, type: "🥔", isFlipped: false },
+  { id: 14, type: "🍠", isFlipped: false },
+  { id: 15, type: "🌶️", isFlipped: false },
+  { id: 16, type: "🦘", isFlipped: false },
 ]
 
 function shuffleArray(array) {
@@ -119,11 +115,11 @@ function GameCards({ shuffledArray }) {
   return (
     <>
       <div className="flex justify-center">
-        <div className="grid grid-cols-4 gap-16">
+        <div className="grid grid-cols-8 gap-2">
           {shuffledArray.map((emoji, index) => (
-            <div key={index} className="text-4xl">
+            <button key={index} className="text-3xl border-4 h-20">
               {emoji}
-            </div>
+            </button>
           ))}
         </div>
       </div>
