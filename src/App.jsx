@@ -129,19 +129,29 @@ function InitialCards({ onSelect }) {
   )
 }
 
-function Card({ type, isFlipped, onClick }) {
+function Card({ type, isFlipped, onFlip }) {
   return (
-    <button className=" border-2 text-4xl p-8 rounded-md bg-green-400">
+    <button
+      className=" border-2 text-4xl p-8 rounded-md bg-green-400"
+      onClick={onFlip}
+    >
       {isFlipped ? type : "✪"}
     </button>
   )
 }
 
+// ################### GAME BOARD ###################
 function GameBoard({ shuffledGameCards }) {
   const [gameCards, setGameCards] = useState(shuffledGameCards)
+  const [flippedCards, setFlippedCards] = useState([])
   console.log("gameCards", gameCards)
   function handleFlip(card) {
-    card.isFlipped = !card.isFlipped
+    if (flippedCards.length < 2) {
+      setGameCards((prev) =>
+        prev.map((c) => (c.id === card.id ? { ...c, isFlipped: true } : c))
+      )
+      setFlippedCards((prev) => [...prev, card])
+    }
   }
 
   return (
@@ -153,7 +163,7 @@ function GameBoard({ shuffledGameCards }) {
               key={card.id}
               type={card.type}
               isFlipped={card.isFlipped}
-              onFlip={() => handleFlip()}
+              onFlip={() => handleFlip(card)}
             />
           ))}
         </div>
