@@ -19,6 +19,7 @@ const emojiCards = [
   { type: "🦘", isFlipped: false },
 ]
 
+// ################## SHUFFLE METHOD ####################
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
@@ -27,30 +28,40 @@ function shuffleArray(array) {
   }
 }
 
+// ################## GET RANDOM ELEMENTS METHOD ####################
 function getRandomElements(arr, n) {
   const copyArr = [...arr]
   shuffleArray(copyArr)
   return copyArr.slice(0, n)
 }
 
-//###################APP START ###################
+//################### $$$$$ APP START  $$$$$ ###################
 const App = () => {
-  const [selectedNumber, setSelectedNumber] = useState(null)
+  const [selectedNumber, setSelectedNumber] =
+    useState(null) /* number of cards to play */
 
-  const starterEmojiArr = getRandomElements(emojiCards, selectedNumber)
-
-  const gameEmojiArr = [...starterEmojiArr, ...starterEmojiArr]
-
-  const shuffledGameArray = getRandomElements(gameEmojiArr, 2 * selectedNumber)
-
-  const shuffledGameArrayWithUniqueIds = shuffledGameArray.map(
-    (item, index) => ({
-      id: index,
-      ...item,
-    })
-  )
   function handleSelect(number) {
     setSelectedNumber(number)
+  }
+
+  function shuffledGameArrayWithUniqueIds(cards, number) {
+    const starterEmojiArr = getRandomElements(cards, number)
+
+    const gameEmojiArr = [...starterEmojiArr, ...starterEmojiArr]
+
+    const shuffledGameArray = getRandomElements(
+      gameEmojiArr,
+      2 * selectedNumber
+    )
+
+    const shuffledGameArrayWithUniqueIds = shuffledGameArray.map(
+      (item, index) => ({
+        id: index,
+        ...item,
+      })
+    )
+
+    return shuffledGameArrayWithUniqueIds
   }
 
   return (
@@ -62,7 +73,12 @@ const App = () => {
         {selectedNumber === null ? (
           <InitialCards onSelect={handleSelect} />
         ) : (
-          <GameBoard shuffledGameCards={shuffledGameArrayWithUniqueIds} />
+          <GameBoard
+            shuffledGameCards={shuffledGameArrayWithUniqueIds(
+              emojiCards,
+              selectedNumber
+            )}
+          />
         )}
       </main>
     </div>
