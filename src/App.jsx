@@ -78,6 +78,7 @@ const App = () => {
               emojiCards,
               selectedNumber
             )}
+            selectedNumber={selectedNumber}
           />
         )}
       </main>
@@ -141,9 +142,22 @@ function Card({ type, isFlipped, onFlip }) {
 }
 
 // ################### GAME BOARD ###################
-function GameBoard({ shuffledGameCards }) {
+function GameBoard({ shuffledGameCards, selectedNumber }) {
   const [gameCards, setGameCards] = useState(shuffledGameCards)
   const [flippedCards, setFlippedCards] = useState([])
+  const colsNumber =
+    selectedNumber === 8
+      ? "grid-cols-4"
+      : selectedNumber === 10
+      ? "grid-cols-5"
+      : selectedNumber === 12
+      ? "grid-cols-6"
+      : selectedNumber === 14
+      ? "grid-cols-7"
+      : selectedNumber === 16
+      ? "grid-cols-8"
+      : "grid-cols-9"
+
   console.log("gameCards", gameCards)
   function handleFlip(card) {
     if (flippedCards.length < 2) {
@@ -157,7 +171,7 @@ function GameBoard({ shuffledGameCards }) {
   return (
     <>
       <div className="flex justify-center">
-        <div className="grid grid-cols-4 gap-4 ">
+        <div className={`grid ${colsNumber} gap-4`}>
           {gameCards.map((card) => (
             <Card
               key={card.id}
