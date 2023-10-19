@@ -33,14 +33,6 @@ function getRandomElements(arr, n) {
   return copyArr.slice(0, n)
 }
 
-function genarateUniqueIds(count) {
-  const uniqueIds = []
-  for (let i = 0; i < count; i++) {
-    uniqueIds.push(i)
-  }
-  return uniqueIds
-}
-
 //###################APP START ###################
 const App = () => {
   const [selectedNumber, setSelectedNumber] = useState(null)
@@ -51,11 +43,9 @@ const App = () => {
 
   const shuffledGameArray = getRandomElements(gameEmojiArr, 2 * selectedNumber)
 
-  const uniqueIds = genarateUniqueIds(shuffledGameArray.length)
-
   const shuffledGameArrayWithUniqueIds = shuffledGameArray.map(
     (item, index) => ({
-      id: uniqueIds[index],
+      id: index,
       ...item,
     })
   )
