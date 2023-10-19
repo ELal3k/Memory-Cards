@@ -1,22 +1,22 @@
 import { useState } from "react"
 
-const emojiArray = [
-  { id: 1, type: "🐢", isFlipped: false },
-  { id: 2, type: "🐳", isFlipped: false },
-  { id: 3, type: "🐬", isFlipped: false },
-  { id: 4, type: "🐦", isFlipped: false },
-  { id: 5, type: "🍍", isFlipped: false },
-  { id: 6, type: "🥝", isFlipped: false },
-  { id: 7, type: "👺", isFlipped: false },
-  { id: 8, type: "🥑", isFlipped: false },
-  { id: 9, type: "🌽", isFlipped: false },
-  { id: 10, type: "🥕", isFlipped: false },
-  { id: 11, type: "🥦", isFlipped: false },
-  { id: 12, type: "🍆", isFlipped: false },
-  { id: 13, type: "🥔", isFlipped: false },
-  { id: 14, type: "🍠", isFlipped: false },
-  { id: 15, type: "🌶️", isFlipped: false },
-  { id: 16, type: "🦘", isFlipped: false },
+const emojiCards = [
+  { type: "🐢", isFlipped: false },
+  { type: "🐳", isFlipped: false },
+  { type: "🐬", isFlipped: false },
+  { type: "🐦", isFlipped: false },
+  { type: "🍍", isFlipped: false },
+  { type: "🥝", isFlipped: false },
+  { type: "👺", isFlipped: false },
+  { type: "🥑", isFlipped: false },
+  { type: "🌽", isFlipped: false },
+  { type: "🥕", isFlipped: false },
+  { type: "🥦", isFlipped: false },
+  { type: "🍆", isFlipped: false },
+  { type: "🥔", isFlipped: false },
+  { type: "🍠", isFlipped: false },
+  { type: "🌶️", isFlipped: false },
+  { type: "🦘", isFlipped: false },
 ]
 
 function shuffleArray(array) {
@@ -28,25 +28,37 @@ function shuffleArray(array) {
 }
 
 function getRandomElements(arr, n) {
-  const copyArr = [...arr] // Create a copy if you don't want to modify the original array
+  const copyArr = [...arr]
   shuffleArray(copyArr)
   return copyArr.slice(0, n)
+}
+
+function genarateUniqueIds(count) {
+  const uniqueIds = []
+  for (let i = 0; i < count; i++) {
+    uniqueIds.push(i)
+  }
+  return uniqueIds
 }
 
 //###################APP START ###################
 const App = () => {
   const [selectedNumber, setSelectedNumber] = useState(null)
 
-  const starterEmojiArr = getRandomElements(emojiArray, selectedNumber)
+  const starterEmojiArr = getRandomElements(emojiCards, selectedNumber)
 
   const gameEmojiArr = [...starterEmojiArr, ...starterEmojiArr]
 
   const shuffledGameArray = getRandomElements(gameEmojiArr, 2 * selectedNumber)
 
-  console.log("selectedNumber:", selectedNumber)
-  console.log("gameEmojiArr:", gameEmojiArr)
-  console.log("shuffledGameArray:", shuffledGameArray)
+  const uniqueIds = genarateUniqueIds(shuffledGameArray.length)
 
+  const shuffledGameArrayWithUniqueIds = shuffledGameArray.map(
+    (item, index) => ({
+      id: uniqueIds[index],
+      ...item,
+    })
+  )
   function handleSelect(number) {
     setSelectedNumber(number)
   }
@@ -60,7 +72,7 @@ const App = () => {
         {selectedNumber === null ? (
           <InitialCards onSelect={handleSelect} />
         ) : (
-          <GameCards shuffledArray={shuffledGameArray} />
+          <GameBoard shuffledGameCards={shuffledGameArrayWithUniqueIds} />
         )}
       </main>
     </div>
@@ -111,15 +123,32 @@ function InitialCards({ onSelect }) {
   )
 }
 
-function GameCards({ shuffledArray }) {
+function Card({ type, isFlipped, onClick }) {
+  return (
+    <button className=" border-2 text-4xl p-8 rounded-md bg-green-400">
+      {isFlipped ? type : "✪"}
+    </button>
+  )
+}
+
+function GameBoard({ shuffledGameCards }) {
+  const [gameCards, setGameCards] = useState(shuffledGameCards)
+  console.log("gameCards", gameCards)
+  function handleFlip(card) {
+    card.isFlipped = !card.isFlipped
+  }
+
   return (
     <>
       <div className="flex justify-center">
-        <div className="grid grid-cols-8 gap-2">
-          {shuffledArray.map((emoji, index) => (
-            <button key={index} className="text-3xl border-4 h-20">
-              {emoji}
-            </button>
+        <div className="grid grid-cols-4 gap-4 ">
+          {gameCards.map((card) => (
+            <Card
+              key={card.id}
+              type={card.type}
+              isFlipped={card.isFlipped}
+              onFlip={() => handleFlip()}
+            />
           ))}
         </div>
       </div>
