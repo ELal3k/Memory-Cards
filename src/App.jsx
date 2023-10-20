@@ -136,7 +136,7 @@ function Card({ type, isFlipped, onFlip }) {
     <div className="bg-slate-500 border-[1px] border-dotted rounded-md"></div>
   ) : (
     <button
-      className="border-2 text-4xl p-8 rounded-md bg-green-400 "
+      className="border-[1px] text-4xl p-8 rounded-md bg-sky-500 "
       onClick={onFlip}
     >
       {isFlipped ? type : <p className="font-nabla text-blue-400"> M </p>}
@@ -223,17 +223,10 @@ function GameBoard({ shuffledGameCards, selectedNumber }) {
   return (
     <>
       <div className="text-center">
-        {" "}
-        <p className="font-dm"> Current Player: {currentPlayer}</p>
-        {countdown > 0 && (
-          <p>
-            {" "}
-            You have <span className="text-4xl text-red-600">
-              {countdown}
-            </span>{" "}
-            seconds left!
-          </p>
-        )}
+        <p className="font-dm pt-10 pb-3 text-lg">
+          {" "}
+          Current Player: {currentPlayer}
+        </p>
       </div>
 
       <div className="flex justify-center">
@@ -247,6 +240,16 @@ function GameBoard({ shuffledGameCards, selectedNumber }) {
             />
           ))}
         </div>
+      </div>
+
+      <div className="text-center pt-3 text-lg font-dm">
+        {countdown > 0 && (
+          <p>
+            <span className="text-8xl text-red-600 font-nabla">
+              {countdown}
+            </span>
+          </p>
+        )}
       </div>
     </>
   )
