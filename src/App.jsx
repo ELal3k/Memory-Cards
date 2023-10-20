@@ -139,7 +139,7 @@ function Card({ type, isFlipped, onFlip }) {
       className="border-2 text-4xl p-8 rounded-md bg-green-400 "
       onClick={onFlip}
     >
-      {isFlipped ? type : "✪"}
+      {isFlipped ? type : <p className="font-nabla text-blue-400"> M </p>}
     </button>
   )
 }
@@ -224,7 +224,7 @@ function GameBoard({ shuffledGameCards, selectedNumber }) {
     <>
       <div className="text-center">
         {" "}
-        <p> Current Player {currentPlayer}</p>
+        <p className="font-dm"> Current Player: {currentPlayer}</p>
         {countdown > 0 && (
           <p>
             {" "}
