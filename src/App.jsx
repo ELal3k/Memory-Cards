@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 const emojiCards = [
   { type: "🐢", isFlipped: false },
@@ -131,9 +131,11 @@ function InitialCards({ onSelect }) {
 }
 
 function Card({ type, isFlipped, onFlip }) {
-  return (
+  return type === null ? (
+    <div className="bg-slate-500"></div>
+  ) : (
     <button
-      className=" border-2 text-4xl p-8 rounded-md bg-green-400"
+      className="border-2 text-4xl p-8 rounded-md bg-green-400"
       onClick={onFlip}
     >
       {isFlipped ? type : "✪"}
@@ -145,6 +147,11 @@ function Card({ type, isFlipped, onFlip }) {
 function GameBoard({ shuffledGameCards, selectedNumber }) {
   const [gameCards, setGameCards] = useState(shuffledGameCards)
   const [flippedCards, setFlippedCards] = useState([])
+  const [countdown, setCountdown] = useState(null)
+  const [currentPlayer, setCurrentPlayer] = useState("player1")
+
+  console.log(gameCards)
+
   const colsNumber =
     selectedNumber === 8
       ? "grid-cols-4"
@@ -158,7 +165,33 @@ function GameBoard({ shuffledGameCards, selectedNumber }) {
       ? "grid-cols-8"
       : "grid-cols-9"
 
-  console.log("gameCards", gameCards)
+  useEffect(() => {
+    if (flippedCards.length === 2) {
+      const [firstCard, secondCard] = flippedCards
+
+      if (firstCard.type === secondCard.type) {
+        setGameCards((prev) =>
+          prev.map((c) =>
+            c.id === firstCard.id || c.id === secondCard.id
+              ? { ...c, type: null }
+              : c
+          )
+        )
+        setFlippedCards([])
+      } else {
+        setGameCards((prev) =>
+          prev.map((c) =>
+            c.id === firstCard.id || c.id === secondCard.id
+              ? { ...c, isFlipped: false }
+              : c
+          )
+        )
+        setFlippedCards([])
+        setCurrentPlayer(currentPlayer === "player1" ? "player2" : "player1")
+      }
+    }
+  }, [flippedCards])
+
   function handleFlip(card) {
     if (flippedCards.length < 2) {
       setGameCards((prev) =>
@@ -168,8 +201,11 @@ function GameBoard({ shuffledGameCards, selectedNumber }) {
     }
   }
 
+  console.log("flippedCards", flippedCards)
+
   return (
     <>
+      <p>Current Player: {currentPlayer}</p>
       <div className="flex justify-center">
         <div className={`grid ${colsNumber} gap-4`}>
           {gameCards.map((card) => (
