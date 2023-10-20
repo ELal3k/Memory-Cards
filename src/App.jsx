@@ -170,27 +170,43 @@ function GameBoard({ shuffledGameCards, selectedNumber }) {
       const [firstCard, secondCard] = flippedCards
 
       if (firstCard.type === secondCard.type) {
-        setGameCards((prev) =>
-          prev.map((c) =>
-            c.id === firstCard.id || c.id === secondCard.id
-              ? { ...c, type: null }
-              : c
+        setTimeout(() => {
+          setGameCards((prev) =>
+            prev.map((c) =>
+              c.id === firstCard.id || c.id === secondCard.id
+                ? { ...c, type: null }
+                : c
+            )
           )
-        )
-        setFlippedCards([])
+          setFlippedCards([])
+        }, 2000)
       } else {
-        setGameCards((prev) =>
-          prev.map((c) =>
-            c.id === firstCard.id || c.id === secondCard.id
-              ? { ...c, isFlipped: false }
-              : c
-          )
-        )
-        setFlippedCards([])
-        setCurrentPlayer(currentPlayer === "player1" ? "player2" : "player1")
+        setCountdown(4)
       }
     }
   }, [flippedCards])
+
+  useEffect(() => {
+    if (countdown === null) return
+    if (countdown > 0) {
+      const timer = setTimeout(() => {
+        setCountdown((prev) => prev - 1)
+      }, 1000)
+      return () => clearTimeout(timer)
+    } else {
+      const [firstCard, secondCard] = flippedCards
+
+      setGameCards((prev) =>
+        prev.map((c) =>
+          c.id === firstCard.id || c.id === secondCard.id
+            ? { ...c, isFlipped: false }
+            : c
+        )
+      )
+    }
+    setFlippedCards([])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [countdown])
 
   function handleFlip(card) {
     if (flippedCards.length < 2) {
@@ -205,7 +221,8 @@ function GameBoard({ shuffledGameCards, selectedNumber }) {
 
   return (
     <>
-      <p>Current Player: {currentPlayer}</p>
+      <p> Current Player {currentPlayer}</p>
+      {countdown !== 0 && <p> You have {countdown} seconds left!</p>}
       <div className="flex justify-center">
         <div className={`grid ${colsNumber} gap-4`}>
           {gameCards.map((card) => (
