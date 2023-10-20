@@ -133,10 +133,10 @@ function InitialCards({ onSelect }) {
 
 function Card({ type, isFlipped, onFlip }) {
   return type === null ? (
-    <div className="bg-slate-500"></div>
+    <div className="bg-slate-500 border-[1px] border-dotted rounded-md"></div>
   ) : (
     <button
-      className="border-2 text-4xl p-8 rounded-md bg-green-400"
+      className="border-2 text-4xl p-8 rounded-md bg-green-400 "
       onClick={onFlip}
     >
       {isFlipped ? type : "✪"}
@@ -150,8 +150,6 @@ function GameBoard({ shuffledGameCards, selectedNumber }) {
   const [flippedCards, setFlippedCards] = useState([])
   const [countdown, setCountdown] = useState(null)
   const [currentPlayer, setCurrentPlayer] = useState("Player1")
-
-  console.log(gameCards)
 
   const colsNumber =
     selectedNumber === 8
@@ -170,7 +168,10 @@ function GameBoard({ shuffledGameCards, selectedNumber }) {
     if (flippedCards.length === 2) {
       const [firstCard, secondCard] = flippedCards
 
-      if (firstCard.type === secondCard.type) {
+      if (
+        firstCard.type === secondCard.type &&
+        firstCard.id !== secondCard.id
+      ) {
         setTimeout(() => {
           setGameCards((prev) =>
             prev.map((c) =>
@@ -219,14 +220,20 @@ function GameBoard({ shuffledGameCards, selectedNumber }) {
     }
   }
 
-  console.log("flippedCards", flippedCards)
-
   return (
     <>
       <div className="text-center">
         {" "}
         <p> Current Player {currentPlayer}</p>
-        {countdown > 0 && <p> You have {countdown} seconds left!</p>}
+        {countdown > 0 && (
+          <p>
+            {" "}
+            You have <span className="text-4xl text-red-600">
+              {countdown}
+            </span>{" "}
+            seconds left!
+          </p>
+        )}
       </div>
 
       <div className="flex justify-center">
