@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react"
 
 const emojiCards = [
@@ -66,7 +67,7 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-slate-500">
-      <header className="pt-4 pb-20">
+      <header className="pt-4 pb-100">
         <h1 className="text-center text-8xl font-nabla">MEMORY CARDS</h1>
       </header>
       <main>
@@ -91,10 +92,10 @@ export default App
 function InitialCards({ onSelect }) {
   return (
     <>
-      <h3 className="font-dm text-2xl text-center">
+      <h3 className="font-dm text-2xl text-center pt-10">
         Choose the number of cards to play
       </h3>
-      <div className="flex justify-center gap-4 py-10">
+      <div className="flex justify-center gap-4 ">
         <button
           className="bg-slate-300 text-4xl p-10 rounded-lg border-4 border-blue-500 "
           onClick={() => onSelect(8)}
@@ -148,7 +149,7 @@ function GameBoard({ shuffledGameCards, selectedNumber }) {
   const [gameCards, setGameCards] = useState(shuffledGameCards)
   const [flippedCards, setFlippedCards] = useState([])
   const [countdown, setCountdown] = useState(null)
-  const [currentPlayer, setCurrentPlayer] = useState("player1")
+  const [currentPlayer, setCurrentPlayer] = useState("Player1")
 
   console.log(gameCards)
 
@@ -179,6 +180,7 @@ function GameBoard({ shuffledGameCards, selectedNumber }) {
             )
           )
           setFlippedCards([])
+          setCurrentPlayer(currentPlayer === "Player1" ? "Player2" : "Player1")
         }, 2000)
       } else {
         setCountdown(4)
@@ -221,8 +223,12 @@ function GameBoard({ shuffledGameCards, selectedNumber }) {
 
   return (
     <>
-      <p> Current Player {currentPlayer}</p>
-      {countdown !== 0 && <p> You have {countdown} seconds left!</p>}
+      <div className="text-center">
+        {" "}
+        <p> Current Player {currentPlayer}</p>
+        {countdown > 0 && <p> You have {countdown} seconds left!</p>}
+      </div>
+
       <div className="flex justify-center">
         <div className={`grid ${colsNumber} gap-4`}>
           {gameCards.map((card) => (
