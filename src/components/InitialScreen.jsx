@@ -1,7 +1,7 @@
 export default function InitialScreen({ onSelect }) {
   return (
     <>
-      <h3 className="font-pixel text-3xl text-center pt-10 text-orange-500">
+      <h3 className="font-pixel text-3xl text-center pt-10 pb-5 text-orange-500">
         Choose the number of cards to play
       </h3>
       <div className="flex justify-center gap-4 ">
@@ -36,6 +36,22 @@ export default function InitialScreen({ onSelect }) {
           32
         </button>
       </div>
+      <p className="flex justify-center mt-10 font-pixel text-3xl text-orange-500">
+        {" "}
+        Please input your names you mem freaks!!!
+      </p>
+      <form className="flex justify-center gap-44 mt-10">
+        <input
+          type="text"
+          placeholder="Player 1"
+          className="rounded-md h-10 p-3 text-center border-4 border-orange-300 focus:outline-none focus:border-orange-500 font-pixel"
+        />
+        <input
+          type="text"
+          placeholder="Player 2"
+          className="rounded-md h-10 p-3 text-center border-4 border-orange-300 focus:outline-none focus:border-orange-500 font-pixel"
+        />
+      </form>
     </>
   )
 }

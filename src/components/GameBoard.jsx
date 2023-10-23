@@ -64,6 +64,7 @@ export default function GameBoard({ shuffledGameCards, selectedNumber }) {
       )
     }
     setFlippedCards([])
+    setCurrentPlayer(currentPlayer === "Player1" ? "Player2" : "Player1")
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [countdown])
 
