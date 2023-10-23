@@ -77,7 +77,7 @@ const App = () => {
         <h1 className="text-center text-7xl font-nabla">MEMORY CARDS</h1>
       </header>
       <main>
-        {selectedNumber === null ? (
+        {!startGame ? (
           <InitialScreen
             onSelect={handleSelect}
             onStart={setStartGame}

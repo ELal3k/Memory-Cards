@@ -6,9 +6,8 @@ export default function InitialScreen({
   onSetPlayer1,
   onSetPlayer2,
 }) {
-  function handleStart(e) {
-    e.preventDefault()
-    onStart(true)
+  function handleCardsNumber(num) {
+    onSelect(num)
   }
   return (
     <>
@@ -18,31 +17,31 @@ export default function InitialScreen({
       <div className="flex justify-center gap-4 ">
         <button
           className="bg-slate-600 text-6xl p-10 rounded-lg border-4 font-pixel border-orange-300   text-orange-500"
-          onClick={() => onSelect(8)}
+          onClick={handleCardsNumber(8)}
         >
           16
         </button>
         <button
           className="bg-slate-600 text-6xl p-10 rounded-lg border-4 font-pixel border-orange-300 text-orange-500 "
-          onClick={() => onSelect(10)}
+          onClick={handleCardsNumber(10)}
         >
           20
         </button>
         <button
           className="bg-slate-600 text-6xl p-10 rounded-lg border-4 font-pixel border-orange-300 text-orange-500"
-          onClick={() => onSelect(12)}
+          onClick={handleCardsNumber(12)}
         >
           24
         </button>
         <button
           className="bg-slate-600 text-6xl p-10 rounded-lg border-4 font-pixel border-orange-300 text-orange-500"
-          onClick={() => onSelect(14)}
+          onClick={handleCardsNumber(14)}
         >
           28
         </button>
         <button
           className="bg-slate-600 text-6xl p-10 rounded-lg border-4 font-pixel border-orange-300 text-orange-500"
-          onClick={() => onSelect(16)}
+          onClick={handleCardsNumber(16)}
         >
           32
         </button>
@@ -79,7 +78,10 @@ export default function InitialScreen({
             </div>
           </div>
 
-          <button className="mt-20 font-pixel text-6xl text-orange-500 font-bold">
+          <button
+            className="mt-20 font-pixel text-6xl text-orange-500 font-bold"
+            onClick={() => onStart(true)}
+          >
             Play
           </button>
         </form>
