@@ -40,6 +40,12 @@ function getRandomElements(arr, n) {
 //################### $$$$$ APP START  $$$$$ ###################
 const App = () => {
   const [selectedNumber, setSelectedNumber] = useState(null)
+  const [player1, setPlayer1] = useState("")
+  const [player2, setPlayer2] = useState("")
+  const [startGame, setStartGame] = useState(false)
+
+  console.log("Player1", player1)
+  console.log("Player2", player2)
 
   function handleSelect(number) {
     setSelectedNumber(number)
@@ -72,7 +78,14 @@ const App = () => {
       </header>
       <main>
         {selectedNumber === null ? (
-          <InitialScreen onSelect={handleSelect} />
+          <InitialScreen
+            onSelect={handleSelect}
+            onStart={setStartGame}
+            player1={player1}
+            player2={player2}
+            onSetPlayer1={setPlayer1}
+            onSetPlayer2={setPlayer2}
+          />
         ) : (
           <GameBoard
             shuffledGameCards={shuffledGameArrayWithUniqueIds(
@@ -80,6 +93,8 @@ const App = () => {
               selectedNumber
             )}
             selectedNumber={selectedNumber}
+            player1={player1}
+            player2={player2}
           />
         )}
       </main>

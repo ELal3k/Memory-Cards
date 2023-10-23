@@ -1,4 +1,15 @@
-export default function InitialScreen({ onSelect }) {
+export default function InitialScreen({
+  onSelect,
+  onStart,
+  player1,
+  player2,
+  onSetPlayer1,
+  onSetPlayer2,
+}) {
+  function handleStart(e) {
+    e.preventDefault()
+    onStart(true)
+  }
   return (
     <>
       <h3 className="font-pixel text-3xl text-center pt-10 pb-5 text-orange-500">
@@ -36,22 +47,43 @@ export default function InitialScreen({ onSelect }) {
           32
         </button>
       </div>
-      <p className="flex justify-center mt-10 font-pixel text-3xl text-orange-500">
-        {" "}
-        Please input your names you mem freaks!!!
-      </p>
-      <form className="flex justify-center gap-44 mt-10">
-        <input
-          type="text"
-          placeholder="Player 1"
-          className="rounded-md h-10 p-3 text-center border-4 border-orange-300 focus:outline-none focus:border-orange-500 font-pixel"
-        />
-        <input
-          type="text"
-          placeholder="Player 2"
-          className="rounded-md h-10 p-3 text-center border-4 border-orange-300 focus:outline-none focus:border-orange-500 font-pixel"
-        />
-      </form>
+      <div className="flex flex-col justify-center items-center mt-10">
+        <p className="font-pixel text-3xl text-orange-500">
+          {" "}
+          Please type your names you mem freaks!!!
+        </p>
+        <form className="flex flex-col justify-center items-center ">
+          <div className="flex justify-center gap-44 mt-2">
+            <div className="flex flex-col items-center">
+              <label className="font-pixel text-xl text-orange-500">
+                Player 1
+              </label>
+              <input
+                type="text"
+                value={player1}
+                className="rounded-md h-10 p-3 text-center border-4 border-orange-300 focus:outline-none focus:border-orange-500 font-pixel"
+                onChange={(e) => onSetPlayer1(e.target.value)}
+              />
+            </div>
+
+            <div className="flex flex-col items-center">
+              <label className="font-pixel text-xl text-orange-500">
+                Player 2
+              </label>
+              <input
+                type="text"
+                value={player2}
+                className="rounded-md h-10 p-3 text-center border-4 border-orange-300 focus:outline-none focus:border-orange-500 font-pixel"
+                onChange={(e) => onSetPlayer2(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <button className="mt-20 font-pixel text-6xl text-orange-500 font-bold">
+            Play
+          </button>
+        </form>
+      </div>
     </>
   )
 }

@@ -1,11 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react"
 
-export default function GameBoard({ shuffledGameCards, selectedNumber }) {
+export default function GameBoard({
+  shuffledGameCards,
+  selectedNumber,
+  player1,
+  player2,
+}) {
   const [gameCards, setGameCards] = useState(shuffledGameCards)
   const [flippedCards, setFlippedCards] = useState([])
   const [countdown, setCountdown] = useState(null)
-  const [currentPlayer, setCurrentPlayer] = useState("Player1")
+  const [currentPlayer, setCurrentPlayer] = useState(player1)
 
   const colsNumber =
     selectedNumber === 8
@@ -37,7 +42,6 @@ export default function GameBoard({ shuffledGameCards, selectedNumber }) {
             )
           )
           setFlippedCards([])
-          setCurrentPlayer(currentPlayer === "Player1" ? "Player2" : "Player1")
         }, 2000)
       } else {
         setCountdown(4)
@@ -64,7 +68,7 @@ export default function GameBoard({ shuffledGameCards, selectedNumber }) {
       )
     }
     setFlippedCards([])
-    setCurrentPlayer(currentPlayer === "Player1" ? "Player2" : "Player1")
+    setCurrentPlayer(currentPlayer === player1 ? player2 : player1)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [countdown])
 
