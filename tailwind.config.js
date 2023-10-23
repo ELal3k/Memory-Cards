@@ -5,7 +5,7 @@ export default {
     extend: {
       fontFamily: {
         nabla: "'Nabla',serif",
-        dm: "'DM Mono',monospace",
+        pixel: "'DotGothic16',monospace",
       },
     },
   },

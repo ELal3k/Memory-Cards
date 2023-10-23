@@ -68,7 +68,7 @@ const App = () => {
   return (
     <div className="min-h-screen bg-slate-500">
       <header className="pt-4 pb-100">
-        <h1 className="text-center text-8xl font-nabla">MEMORY CARDS</h1>
+        <h1 className="text-center text-7xl font-nabla">MEMORY CARDS</h1>
       </header>
       <main>
         {selectedNumber === null ? (

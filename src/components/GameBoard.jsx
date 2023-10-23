@@ -79,9 +79,9 @@ export default function GameBoard({ shuffledGameCards, selectedNumber }) {
   return (
     <>
       <div className="text-center">
-        <p className="font-dm pt-10 pb-3 text-lg">
+        <p className="font-pixel pt-6 pb-3 text-3xl text-orange-500 font-bold">
           {" "}
-          Current Player: {currentPlayer}
+          {currentPlayer}
         </p>
       </div>
 
@@ -101,9 +101,7 @@ export default function GameBoard({ shuffledGameCards, selectedNumber }) {
       <div className="text-center pt-3 text-lg font-dm">
         {countdown > 0 && (
           <p>
-            <span className="text-8xl text-red-600 font-nabla">
-              {countdown}
-            </span>
+            <span className="text-7xl font-nabla">{countdown}</span>
           </p>
         )}
       </div>
