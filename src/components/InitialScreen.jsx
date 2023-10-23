@@ -26,7 +26,7 @@ export default function InitialScreen({
         Choose the number of cards to play
       </h3>
       <div className="flex justify-center gap-4 ">
-        {cardsNumber.map((card, id) => (
+        {cardsNumber.map((card) => (
           <button
             key={card.id}
             className={`bg-slate-600 text-6xl p-10 rounded-lg border-4 font-pixel border-orange-300 text-orange-500 ${
