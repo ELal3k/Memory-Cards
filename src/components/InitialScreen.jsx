@@ -1,3 +1,12 @@
+import { useState } from "react"
+const cardsNumber = [
+  { id: 1, number: 8 },
+  { id: 2, number: 10 },
+  { id: 3, number: 12 },
+  { id: 4, number: 14 },
+  { id: 5, number: 16 },
+]
+
 export default function InitialScreen({
   onSelect,
   onStart,
@@ -6,8 +15,10 @@ export default function InitialScreen({
   onSetPlayer1,
   onSetPlayer2,
 }) {
-  function handleCardsNumber(num) {
-    onSelect(num)
+  const [animated, setAnimated] = useState("")
+  function handleCardsNumber(card) {
+    onSelect(card.number)
+    setAnimated(card.id)
   }
   return (
     <>
@@ -15,36 +26,17 @@ export default function InitialScreen({
         Choose the number of cards to play
       </h3>
       <div className="flex justify-center gap-4 ">
-        <button
-          className="bg-slate-600 text-6xl p-10 rounded-lg border-4 font-pixel border-orange-300   text-orange-500"
-          onClick={handleCardsNumber(8)}
-        >
-          16
-        </button>
-        <button
-          className="bg-slate-600 text-6xl p-10 rounded-lg border-4 font-pixel border-orange-300 text-orange-500 "
-          onClick={handleCardsNumber(10)}
-        >
-          20
-        </button>
-        <button
-          className="bg-slate-600 text-6xl p-10 rounded-lg border-4 font-pixel border-orange-300 text-orange-500"
-          onClick={handleCardsNumber(12)}
-        >
-          24
-        </button>
-        <button
-          className="bg-slate-600 text-6xl p-10 rounded-lg border-4 font-pixel border-orange-300 text-orange-500"
-          onClick={handleCardsNumber(14)}
-        >
-          28
-        </button>
-        <button
-          className="bg-slate-600 text-6xl p-10 rounded-lg border-4 font-pixel border-orange-300 text-orange-500"
-          onClick={handleCardsNumber(16)}
-        >
-          32
-        </button>
+        {cardsNumber.map((card, id) => (
+          <button
+            key={card.id}
+            className={`bg-slate-600 text-6xl p-10 rounded-lg border-4 font-pixel border-orange-300 text-orange-500 ${
+              card.id === animated ? "animate-bounce" : ""
+            }`}
+            onClick={() => handleCardsNumber(card)}
+          >
+            {2 * card.number}
+          </button>
+        ))}
       </div>
       <div className="flex flex-col justify-center items-center mt-10">
         <p className="font-pixel text-3xl text-orange-500">
