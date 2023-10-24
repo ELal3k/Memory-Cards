@@ -8,6 +8,7 @@ const cardsNumber = [
 ]
 
 export default function InitialScreen({
+  selectedNumber,
   onSelect,
   onStart,
   player1,
@@ -16,10 +17,12 @@ export default function InitialScreen({
   onSetPlayer2,
 }) {
   const [animated, setAnimated] = useState("")
+
   function handleCardsNumber(card) {
     onSelect(card.number)
     setAnimated(card.id)
   }
+
   return (
     <>
       <h3 className="font-pixel text-3xl text-center pt-10 pb-5 text-orange-500">
@@ -30,8 +33,8 @@ export default function InitialScreen({
           <button
             key={card.id}
             className={`bg-slate-600 text-6xl p-10 rounded-lg border-4 font-pixel border-orange-300 text-orange-500 ${
-              card.id === animated ? "animate-bounce" : ""
-            }`}
+              card.id === animated ? "animate-pulse" : ""
+            } duration-100`}
             onClick={() => handleCardsNumber(card)}
           >
             {2 * card.number}
@@ -72,7 +75,9 @@ export default function InitialScreen({
 
           <button
             className="mt-20 font-pixel text-6xl text-orange-500 font-bold"
-            onClick={() => onStart(true)}
+            onClick={
+              selectedNumber ? () => onStart(true) : () => onStart(false)
+            }
           >
             Play
           </button>

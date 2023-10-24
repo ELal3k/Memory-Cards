@@ -8,10 +8,15 @@ export default {
         pixel: "'DotGothic16',monospace",
       },
       keyframes: {
-        bounce: {
-          "0%, 20%, 50%, 80%, 100%": { transform: "translateY(0)" },
-          "40%": { transform: "translateY(-15px)" }, // Reduced bounce height
-          "60%": { transform: "translateY(-10px)" }, // Reduced bounce height
+        pulse: {
+          "0%, 100%": {
+            opacity: 1,
+            transform: "scale(1)",
+          },
+          "50%": {
+            opacity: 0.7, // Adjust opacity as desired
+            transform: "scale(1.1)", // Adjust scaling factor as desired
+          },
         },
       },
     },

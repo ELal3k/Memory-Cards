@@ -79,6 +79,7 @@ const App = () => {
       <main>
         {!startGame ? (
           <InitialScreen
+            selectedNumber={selectedNumber}
             onSelect={handleSelect}
             onStart={setStartGame}
             player1={player1}

@@ -91,6 +91,10 @@ export default function GameBoard({
       </div>
 
       <div className="flex justify-center">
+        <p className="font-pixel pt-6 pb-3 text-3xl text-orange-500 font-bold">
+          {" "}
+          {currentPlayer}
+        </p>
         <div className={`grid ${colsNumber} gap-4`}>
           {gameCards.map((card) => (
             <Card
