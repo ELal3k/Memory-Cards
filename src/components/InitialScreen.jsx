@@ -44,15 +44,15 @@ export default function InitialScreen({
       </div>
       <div className="flex flex-col justify-center items-center mt-10">
         {!selectedNumber ? (
-          <p className="font-pixel text-3xl text-orange-500 blur-sm">
-            {" "}
-            Please type your names you mem freaks!!!
-          </p>
+          ""
         ) : (
-          <p className="font-pixel text-3xl text-orange-500">
-            {" "}
+          <motion.p
+            className="font-pixel text-3xl text-orange-500"
+            initial={{ scale: 0 }} // Initial state (small scale)
+            animate={{ scale: 1 }} // Final state (normal scale)
+          >
             Please type your names you mem freaks!!!
-          </p>
+          </motion.p>
         )}
         <form className="flex flex-col justify-center items-center ">
           {!selectedNumber ? (
