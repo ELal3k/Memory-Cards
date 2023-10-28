@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { motion } from "framer-motion"
 const cardsNumber = [
   { id: 1, number: 8 },
   { id: 2, number: 10 },
@@ -109,12 +110,14 @@ export default function InitialScreen({
           )}
 
           {player1 !== "" && player2 !== "" && selectedNumber && (
-            <button
+            <motion.button
               className="mt-20 font-pixel text-6xl text-orange-500 font-bold"
               onClick={() => onStart(true)}
+              initial={{ scale: 0 }} // Initial state (small scale)
+              animate={{ scale: 1 }} // Final state (normal scale)
             >
               Play
-            </button>
+            </motion.button>
           )}
         </form>
       </div>
