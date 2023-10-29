@@ -14,6 +14,7 @@ export default function GameBoard({
   const [currentPlayer, setCurrentPlayer] = useState(player1)
   const [points1, setPoints1] = useState(0)
   const [points2, setPoints2] = useState(0)
+  const [winner, setWinner] = useState(null)
 
   const colsNumber =
     selectedNumber === 8
@@ -27,6 +28,16 @@ export default function GameBoard({
       : selectedNumber === 16
       ? "grid-cols-8"
       : "grid-cols-9"
+
+  useEffect(() => {
+    if (points1 + points2 === 2 * selectedNumber) {
+      if (points1 > points2) {
+        setWinner(player1)
+      } else {
+        setWinner(player2)
+      }
+    }
+  })
 
   useEffect(() => {
     if (flippedCards.length === 2) {
@@ -97,7 +108,7 @@ export default function GameBoard({
       setFlippedCards((prev) => [...prev, card])
     }
   }
-
+  console.log(selectedNumber)
   return (
     <>
       <div className="text-center">
@@ -130,13 +141,19 @@ export default function GameBoard({
         </div>
       </div>
 
-      <div className="text-center pt-3 text-lg font-dm">
+      <div className="text-center pt-3">
         {countdown > 0 && (
           <p>
             <span className="text-7xl font-nabla">{countdown}</span>
           </p>
         )}
       </div>
+
+      {points1 + points2 === 2 * selectedNumber && (
+        <div className="text-center">
+          <p className="text-7xl font-nabla">Game Over</p>
+        </div>
+      )}
     </>
   )
 }
