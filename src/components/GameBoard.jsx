@@ -107,12 +107,12 @@ export default function GameBoard({
       </div>
 
       <div className="flex justify-center">
-        <div className="grid grid-cols-3 ">
-          <div className="font-pixel text-center text-4xl text-orange-500 font-bold capitalize">
-            <p>{player1}</p>
-            <p>Cards:{points1}</p>
+        <div className="grid grid-cols-9">
+          <div className="col-span-2 px-16 font-pixel text-center text-4xl text-orange-500 font-bold capitalize">
+            <p className="text-yellow-400">{player1}</p>
+            <p className="text-yellow-400">Cards:{points1}</p>
           </div>
-          <div className={`grid ${colsNumber} gap-4`}>
+          <div className={`grid ${colsNumber} gap-4 col-span-5`}>
             {gameCards.map((card) => (
               <Card
                 key={card.id}
@@ -122,9 +122,9 @@ export default function GameBoard({
               />
             ))}
           </div>
-          <p className="font-pixel text-center text-4xl text-orange-500 font-bold capitalize">
-            <p>{player2}</p>
-            <p>Cards:{points2}</p>
+          <p className="col-span-2 px-16 font-pixel text-center text-4xl text-orange-500 font-bold capitalize">
+            <p className="text-yellow-400">{player2}</p>
+            <p className="text-yellow-400">Cards:{points2}</p>
           </p>
         </div>
       </div>
@@ -145,7 +145,8 @@ function Card({ type, isFlipped, onFlip }) {
     <div className="bg-slate-500 border-[1px] border-dotted rounded-md"></div>
   ) : (
     <button
-      className="border-[1px] text-4xl p-8 rounded-md bg-sky-500 "
+      className="border-[1px] text-4xl p-8 rounded-md bg-sky-500 flex justify-center items-center"
+      disabled={isFlipped}
       onClick={onFlip}
     >
       {isFlipped ? type : <p className="font-nabla text-blue-400"> M </p>}
