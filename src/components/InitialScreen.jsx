@@ -49,40 +49,22 @@ export default function InitialScreen({
           <motion.p
             className="font-pixel text-3xl text-orange-500"
             initial={{ scale: 0 }} // Initial state (small scale)
-            animate={{ scale: 1 }} // Final state (normal scale)
+            animate={{ scale: [0, 1.5, 1], opacity: [0, 1, 1] }} // Keyframes for scale and opacity
+            transition={{ duration: 0.8, ease: "easeOut" }} // Duration and easing
           >
             Please type your names you mem freaks!!!
           </motion.p>
         )}
         <form className="flex flex-col justify-center items-center ">
           {!selectedNumber ? (
-            <div className="flex justify-center gap-44 mt-2 blur-sm">
-              <div className="flex flex-col items-center">
-                <label className="font-pixel text-xl text-orange-500">
-                  Player 1
-                </label>
-                <input
-                  type="text"
-                  value={player1}
-                  className="rounded-md h-10 p-3 text-center border-4 border-orange-300 focus:outline-none focus:border-orange-500 font-pixel"
-                  onChange={(e) => onSetPlayer1(e.target.value)}
-                />
-              </div>
-
-              <div className="flex flex-col items-center">
-                <label className="font-pixel text-xl text-orange-500">
-                  Player 2
-                </label>
-                <input
-                  type="text"
-                  value={player2}
-                  className="rounded-md h-10 p-3 text-center border-4 border-orange-300 focus:outline-none focus:border-orange-500 font-pixel"
-                  onChange={(e) => onSetPlayer2(e.target.value)}
-                />
-              </div>
-            </div>
+            ""
           ) : (
-            <div className="flex justify-center gap-44 mt-2">
+            <motion.div
+              className="flex justify-center gap-44 mt-2"
+              initial={{ scale: 0 }}
+              animate={{ scale: [0, 1.5, 1], opacity: [0, 1, 1] }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            >
               <div className="flex flex-col items-center">
                 <label className="font-pixel text-xl text-orange-500">
                   Player 1
@@ -106,15 +88,16 @@ export default function InitialScreen({
                   onChange={(e) => onSetPlayer2(e.target.value)}
                 />
               </div>
-            </div>
+            </motion.div>
           )}
 
           {player1 !== "" && player2 !== "" && selectedNumber && (
             <motion.button
               className="mt-20 font-pixel text-6xl text-orange-500 font-bold"
               onClick={() => onStart(true)}
-              initial={{ scale: 0 }} // Initial state (small scale)
-              animate={{ scale: 1 }} // Final state (normal scale)
+              initial={{ scale: 1, opacity: 1 }}
+              animate={{ scale: [1, 1.2, 1], opacity: [1, 0.6, 1] }}
+              transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
             >
               Play
             </motion.button>
