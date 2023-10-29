@@ -71,7 +71,7 @@ export default function InitialScreen({
                 </label>
                 <input
                   type="text"
-                  value={player1}
+                  value={player1.name}
                   className="rounded-md h-10 p-3 text-center border-4 border-orange-300 focus:outline-none focus:border-orange-500 font-pixel"
                   onChange={(e) => onSetPlayer1(e.target.value)}
                 />

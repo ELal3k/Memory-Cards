@@ -11,6 +11,8 @@ export default function GameBoard({
   const [flippedCards, setFlippedCards] = useState([])
   const [countdown, setCountdown] = useState(null)
   const [currentPlayer, setCurrentPlayer] = useState(player1)
+  const [points1, setPoints1] = useState(0)
+  const [points2, setPoints2] = useState(0)
 
   const colsNumber =
     selectedNumber === 8
@@ -24,6 +26,20 @@ export default function GameBoard({
       : selectedNumber === 16
       ? "grid-cols-8"
       : "grid-cols-9"
+
+  useEffect(() => {
+    if (flippedCards.length === 2) {
+      const [firstCard, secondCard] = flippedCards
+      if (firstCard.type === secondCard.type && currentPlayer === player1) {
+        setPoints1((prev) => prev + 2)
+      } else if (
+        firstCard.type === secondCard.type &&
+        currentPlayer === player2
+      ) {
+        setPoints2((prev) => prev + 2)
+      }
+    }
+  }, [flippedCards])
 
   useEffect(() => {
     if (flippedCards.length === 2) {
@@ -84,26 +100,32 @@ export default function GameBoard({
   return (
     <>
       <div className="text-center">
-        <p className="font-pixel pt-6 pb-3 text-3xl text-orange-500 font-bold">
-          {" "}
-          {currentPlayer}
+        <p className="font-pixel pt-6 pb-3 text-4xl text-yellow-400 font-bold">
+          <span className="capitalize">{currentPlayer}</span>
+          `s turn
         </p>
       </div>
 
       <div className="flex justify-center">
-        <p className="font-pixel pt-6 pb-3 text-3xl text-orange-500 font-bold">
-          {" "}
-          {currentPlayer}
-        </p>
-        <div className={`grid ${colsNumber} gap-4`}>
-          {gameCards.map((card) => (
-            <Card
-              key={card.id}
-              type={card.type}
-              isFlipped={card.isFlipped}
-              onFlip={() => handleFlip(card)}
-            />
-          ))}
+        <div className="grid grid-cols-3 ">
+          <div className="font-pixel text-center text-4xl text-orange-500 font-bold capitalize">
+            <p>{player1}</p>
+            <p>Cards:{points1}</p>
+          </div>
+          <div className={`grid ${colsNumber} gap-4`}>
+            {gameCards.map((card) => (
+              <Card
+                key={card.id}
+                type={card.type}
+                isFlipped={card.isFlipped}
+                onFlip={() => handleFlip(card)}
+              />
+            ))}
+          </div>
+          <p className="font-pixel text-center text-4xl text-orange-500 font-bold capitalize">
+            <p>{player2}</p>
+            <p>Cards:{points2}</p>
+          </p>
         </div>
       </div>
 
