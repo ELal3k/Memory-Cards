@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react"
+import { motion } from "framer-motion"
 
 export default function GameBoard({
   shuffledGameCards,
@@ -141,15 +142,35 @@ export default function GameBoard({
 }
 
 function Card({ type, isFlipped, onFlip }) {
+  const cardVariants = {
+    flipped: { rotateY: 180, transition: { duration: 0.5 } },
+    unflipped: { rotateY: 0, transition: { duration: 0.5 } },
+  }
+
   return type === null ? (
-    <div className="bg-slate-500 border-[1px] border-dotted rounded-md"></div>
+    <motion.div
+      className="bg-slate-500 border-[1px] border-dotted rounded-md"
+      initial={isFlipped ? "flipped" : "unflipped"}
+      animate={isFlipped ? "flipped" : "unflipped"}
+    ></motion.div>
   ) : (
-    <button
+    <motion.button
       className="border-[1px] text-4xl p-8 rounded-md bg-sky-500 flex justify-center items-center"
       disabled={isFlipped}
       onClick={onFlip}
+      whileTap={isFlipped ? {} : { rotateY: 180 }}
     >
-      {isFlipped ? type : <p className="font-nabla text-blue-400"> M </p>}
-    </button>
+      {isFlipped ? (
+        <motion.div
+          variants={cardVariants}
+          initial="unflipped"
+          animate={isFlipped ? "flipped" : "unflipped"}
+        >
+          {type}
+        </motion.div>
+      ) : (
+        <p className="font-nabla text-blue-400"> M </p>
+      )}
+    </motion.button>
   )
 }
