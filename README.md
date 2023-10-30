@@ -1,5 +1,5 @@
 # Memory Cards
-![App Screenshot](src/assets/Memory2.png)
-![App Screenshot](src/assets/Memory1.png)
-<img src="src/assets/Memory1.png" alt="Image Alt Text" width="600"  />
+
+<img src="src/assets/Memory2.png" alt="Image Alt Text" width="800"  />
+<img src="src/assets/Memory1.png" alt="Image Alt Text" width="800"  />
 
