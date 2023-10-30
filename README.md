@@ -5,6 +5,6 @@
 
 A card memory game built with React.js and Vite!<br>
 ## Libraries used:
-  *[TailwindCSS](https://tailwindcss.com/)
+-[TailwindCSS](https://tailwindcss.com/)
   
-  *[Framer Motion](https://www.framer.com/motion/)
+-[Framer Motion](https://www.framer.com/motion/)
