@@ -44,9 +44,6 @@ const App = () => {
   const [player2, setPlayer2] = useState("")
   const [startGame, setStartGame] = useState(false)
 
-  console.log("Player1", player1)
-  console.log("Player2", player2)
-
   function handleSelect(number) {
     setSelectedNumber(number)
   }
@@ -60,6 +57,7 @@ const App = () => {
       gameEmojiArr,
       2 * selectedNumber
     )
+    console.log(shuffledGameArray)
 
     const shuffledGameArrayWithUniqueIds = shuffledGameArray.map(
       (item, index) => ({
@@ -96,6 +94,7 @@ const App = () => {
             selectedNumber={selectedNumber}
             player1={player1}
             player2={player2}
+            onStartGame={setStartGame}
           />
         )}
       </main>

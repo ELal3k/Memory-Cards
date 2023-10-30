@@ -7,6 +7,7 @@ export default function GameBoard({
   selectedNumber,
   player1,
   player2,
+  onStartGame,
 }) {
   const [gameCards, setGameCards] = useState(shuffledGameCards)
   const [flippedCards, setFlippedCards] = useState([])
@@ -150,8 +151,17 @@ export default function GameBoard({
       </div>
 
       {points1 + points2 === 2 * selectedNumber && (
-        <div className="text-center">
+        <div className="flex flex-col gap-4 justify-center items-center">
           <p className="text-7xl font-nabla">Game Over</p>
+          <p className="text-5xl font-pixel text-yellow-400">
+            <span className="capitalize">{winner}</span> is the winner
+          </p>
+          <button
+            className="border-[1px] text-2xl p-4 rounded-md bg-sky-500  font-pixel border-orange-300 text-yellow-400 flex items-center justify-center animate-pulse"
+            onClick={() => onStartGame(false)}
+          >
+            Play Again?
+          </button>
         </div>
       )}
     </>
