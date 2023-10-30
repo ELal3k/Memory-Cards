@@ -4,7 +4,9 @@
 <img src="src/assets/Memory1.png" alt="Image Alt Text" width="800"  />
 
 A card memory game built with React.js and Vite!<br>
-## Libraries used:
+### Libraries used:
 - [TailwindCSS](https://tailwindcss.com/)
 - [Framer Motion](https://www.framer.com/motion/)
 
+### Play Now
+[Memory Cards](https://memory-cards-elalek.netlify.app/)
