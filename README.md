@@ -1,8 +1,12 @@
-# React + Vite
+# Memory Cards
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<img src="src/assets/Memory2.png" alt="Image Alt Text" width="800"  />
+<img src="src/assets/Memory1.png" alt="Image Alt Text" width="800"  />
 
-Currently, two official plugins are available:
+A card memory game built with React.js and Vite!<br>
+### Libraries used:
+- [TailwindCSS](https://tailwindcss.com/)
+- [Framer Motion](https://www.framer.com/motion/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Play Now
+[Memory Cards](https://memory-cards-elalek.netlify.app/)
