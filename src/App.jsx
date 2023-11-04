@@ -96,6 +96,8 @@ const App = () => {
             player1={player1}
             player2={player2}
             onStartGame={setStartGame}
+            onSetPlayer1={setPlayer1}
+            onSetPlayer2={setPlayer2}
           />
         )}
       </main>

@@ -9,6 +9,8 @@ export default function GameBoard({
   player1,
   player2,
   onStartGame,
+  onSetPlayer1,
+  onSetPlayer2,
 }) {
   const [gameCards, setGameCards] = useState(shuffledGameCards)
   const [flippedCards, setFlippedCards] = useState([])
@@ -114,6 +116,8 @@ export default function GameBoard({
   function handleGameOver() {
     onStartGame(false)
     onSelect(null)
+    onSetPlayer1("")
+    onSetPlayer2("")
   }
   return (
     <>
