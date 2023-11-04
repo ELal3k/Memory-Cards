@@ -92,6 +92,7 @@ const App = () => {
               selectedNumber
             )}
             selectedNumber={selectedNumber}
+            onSelect={handleSelect}
             player1={player1}
             player2={player2}
             onStartGame={setStartGame}

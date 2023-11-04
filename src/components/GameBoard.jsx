@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 export default function GameBoard({
   shuffledGameCards,
   selectedNumber,
+  onSelect,
   player1,
   player2,
   onStartGame,
@@ -109,7 +110,11 @@ export default function GameBoard({
       setFlippedCards((prev) => [...prev, card])
     }
   }
-  console.log(selectedNumber)
+
+  function handleGameOver() {
+    onStartGame(false)
+    onSelect(null)
+  }
   return (
     <>
       <div className="text-center">
@@ -158,7 +163,7 @@ export default function GameBoard({
           </p>
           <button
             className="border-[1px] text-2xl p-4 rounded-md bg-sky-500  font-pixel border-orange-300 text-yellow-400 flex items-center justify-center animate-pulse"
-            onClick={() => onStartGame(false)}
+            onClick={() => handleGameOver()}
           >
             Play Again?
           </button>
